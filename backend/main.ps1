@@ -2,12 +2,10 @@
 #     Write-Host "Hello, World!"
 # }
 
-# Write-Host "Hello, World!"
-# Start-Sleep -Seconds 5
+function Get-ActiveProcess {
 
-[CmdletBinding()]
-Param()
-Add-Type @"
+    Param()    
+    Add-Type @"
   using System;
   using System.Runtime.InteropServices;
 
@@ -18,3 +16,13 @@ public class UserWindows {
 "@
     $ActiveHandle = [UserWindows]::GetForegroundWindow()
     Get-Process | ? {$_.MainWindowHandle -eq $ActiveHandle}
+}
+
+$appLog = @{
+}
+
+
+Start-Sleep -Seconds 5
+$process = Get-ActiveProcess
+$appLog[$process.processName] = 5
+$appLog
