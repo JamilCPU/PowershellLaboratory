@@ -1,32 +1,11 @@
-function Call-Save-User-Data{
-    Param([hashtable]$UserData)
-    Write-Host "Attempting to call save.ps1..."
-    ./save.ps1 -UserData $UserData
-}
-
-function Get-ActiveProcess {
-
-    Param()    
-    Add-Type @"
-  using System;
-  using System.Runtime.InteropServices;
-
-public class UserWindows {
-    [DllImport("user32.dll")]
-    public static extern IntPtr GetForegroundWindow();
-}
-"@
-    $ActiveHandle = [UserWindows]::GetForegroundWindow()
-    Get-Process | ? {$_.MainWindowHandle -eq $ActiveHandle}
-}
-
+. .\util\CollectUtilities.ps1
 
 
 $appLog = @{}
 
 
 try {
-    $file = Get-Content -Path ../output/userData.txt 
+    $file = Get-Content -Path ../../output/userData.txt 
 
     
     ForEach ($line in $file) {
