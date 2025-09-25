@@ -27,8 +27,14 @@ $appLog = @{
 while($true){
     $wait = Get-Random -Maximum 100
     Write-Host "Waiting for $wait seconds"
+    Start-Sleep -Seconds $wait
     $process = Get-ActiveProcess
-    $appLog[$process.processName] = $wait
+    if($appLog[$process.processName]){
+        $appLog[$process.processName] += $wait
+    }else{
+        $appLog[$process.processName] = $wait
+    }
     $appLog
+    Start-Sleep -Seconds 5
 
 }
