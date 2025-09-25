@@ -1,4 +1,4 @@
-function Call-Save-User-Data{
+function Save-UserData{
     Param([hashtable]$UserData)
     Write-Host "Attempting to call save.ps1..."
     ../storage/Save.ps1 -UserData $UserData
