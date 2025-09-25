@@ -35,6 +35,4 @@ while($true){
         $appLog[$process.processName] = $wait
     }
     $appLog
-    Start-Sleep -Seconds 5
-
 }
