@@ -23,7 +23,6 @@ $appLog = @{
 
 
 
-
 while($true){
     $wait = Get-Random -Minimum 5 -Maximum 35
     Write-Host "Waiting for $wait seconds"
@@ -34,5 +33,6 @@ while($true){
     }else{
         $appLog[$process.processName] = $wait
     }
-    $appLog
+    $appLog | Out-File -FilePath ../output/userData.txt
+
 }
