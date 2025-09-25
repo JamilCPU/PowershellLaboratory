@@ -25,7 +25,7 @@ $appLog = @{
 
 
 while($true){
-    $wait = Get-Random -Maximum 100
+    $wait = Get-Random -Minimum 5 -Maximum 35
     Write-Host "Waiting for $wait seconds"
     Start-Sleep -Seconds $wait
     $process = Get-ActiveProcess
