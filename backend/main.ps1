@@ -22,7 +22,13 @@ $appLog = @{
 }
 
 
-Start-Sleep -Seconds 5
-$process = Get-ActiveProcess
-$appLog[$process.processName] = 5
-$appLog
+
+
+while($true){
+    $wait = Get-Random -Maximum 100
+    Write-Host "Waiting for $wait seconds"
+    $process = Get-ActiveProcess
+    $appLog[$process.processName] = $wait
+    $appLog
+
+}
