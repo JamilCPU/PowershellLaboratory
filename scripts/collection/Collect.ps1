@@ -24,8 +24,10 @@
 
 $UserData = @{}
 
+
+$counter = 0
+
 while ($true) {
-    $counter = 0
     $wait = Get-Random -Minimum 5 -Maximum 35
     Write-Host "Waiting for $wait seconds"
     $process = Get-ActiveProcess
@@ -38,11 +40,11 @@ while ($true) {
     }
     $UserData
     if ($counter -eq 5) {
+        Write-Host "Writing to file..."
         $UserData | Out-File -FilePath ../../output/userData.txt
         $counter = 0
     }
     else {
-        $counter += 1
+        $counter++
     }
 }
-
