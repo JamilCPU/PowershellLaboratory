@@ -1,7 +1,7 @@
 function Call-Save-UserData{
     Param([hashtable]$UserData)
     Write-Host "Attempting to call save.ps1..."
-    $UserData
+
     
     Start-Process powershell -ArgumentList @(
         "-File", "../storage/Save.ps1",

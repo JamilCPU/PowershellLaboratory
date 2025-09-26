@@ -1,7 +1,6 @@
 . .\util\CollectUtilities.ps1
 
 
-$UserData = @{}
 
 
 # try {
@@ -23,26 +22,27 @@ $UserData = @{}
 # }
 
 
+$UserData = @{}
 
-
-try {
-    while ($true) {
-        $wait = Get-Random -Minimum 5 -Maximum 35
-        Write-Host "Waiting for $wait seconds"
-        $process = Get-ActiveProcess
-        Start-Sleep -Seconds $wait
-        if ($UserData[$process.processName]) {
-            $UserData[$process.processName] += $wait
-        }
-        else {
-            $UserData[$process.processName] = $wait
-        }
-        #$UserData | Out-File -FilePath ../../output/userData.txt
-        $UserData
+while ($true) {
+    $counter = 0
+    $wait = Get-Random -Minimum 5 -Maximum 35
+    Write-Host "Waiting for $wait seconds"
+    $process = Get-ActiveProcess
+    Start-Sleep -Seconds $wait
+    if ($UserData[$process.processName]) {
+        $UserData[$process.processName] += $wait
+    }
+    else {
+        $UserData[$process.processName] = $wait
+    }
+    $UserData
+    if ($counter -eq 5) {
+        $UserData | Out-File -FilePath ../../output/userData.txt
+        $counter = 0
+    }
+    else {
+        $counter += 1
     }
 }
-finally {
-    Write-Host "Finally block tripped"
-    Call-Save-UserData($UserData)
- 
-}
+
