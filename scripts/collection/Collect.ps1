@@ -1,7 +1,7 @@
 . .\util\CollectUtilities.ps1
 
 
-$appLog = @{}
+$UserData = @{}
 
 
 # try {
@@ -31,17 +31,18 @@ try {
         Write-Host "Waiting for $wait seconds"
         $process = Get-ActiveProcess
         Start-Sleep -Seconds $wait
-        if ($appLog[$process.processName]) {
-            $appLog[$process.processName] += $wait
+        if ($UserData[$process.processName]) {
+            $UserData[$process.processName] += $wait
         }
         else {
-            $appLog[$process.processName] = $wait
+            $UserData[$process.processName] = $wait
         }
-        #$appLog | Out-File -FilePath ../../output/userData.txt
-        $appLog
+        #$UserData | Out-File -FilePath ../../output/userData.txt
+        $UserData
     }
 }
 finally {
-    Call-Save-UserData($appLog)
-
+    Write-Host "Finally block tripped"
+    Call-Save-UserData($UserData)
+ 
 }

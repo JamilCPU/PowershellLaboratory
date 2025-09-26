@@ -1,7 +1,14 @@
-function Save-UserData{
+function Call-Save-UserData{
     Param([hashtable]$UserData)
     Write-Host "Attempting to call save.ps1..."
-    ../storage/Save.ps1 -UserData $UserData
+    $UserData
+    
+    Start-Process powershell -ArgumentList @(
+        "-File", "../storage/Save.ps1",
+        "-UserData", $UserData,
+        "-DebugMode"
+    )
+    #../storage/Save.ps1 -UserData $UserData
 }
 
 function Get-ActiveProcess {
